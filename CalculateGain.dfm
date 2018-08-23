@@ -1,0 +1,96 @@
+object CalculateGainForm: TCalculateGainForm
+  Left = 444
+  Top = 305
+  Width = 417
+  Height = 230
+  Caption = 'Calculate Gain'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -14
+  Font.Name = 'MS Sans Serif'
+  Font.Style = [fsBold]
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 16
+  object DesiredUnitsEd: TAdvEdit
+    Left = 182
+    Top = 31
+    Width = 56
+    Height = 27
+    OnValueValidate = DesiredUnitsEdValueValidate
+    AutoFocus = False
+    EditAlign = eaLeft
+    EditType = etFloat
+    ErrorMarkerPos = 0
+    ErrorMarkerLen = 0
+    ErrorColor = clRed
+    ErrorFontColor = clWhite
+    ExcelStyleDecimalSeparator = False
+    Flat = False
+    FlatLineColor = clBlack
+    FlatParentColor = True
+    FocusAlign = eaDefault
+    FocusBorder = False
+    FocusColor = clWindow
+    FocusFontColor = clWindowText
+    FocusLabel = False
+    FocusWidthInc = 0
+    ModifiedColor = clHighlight
+    DisabledColor = clSilver
+    URLColor = clBlue
+    ReturnIsTab = False
+    LengthLimit = 0
+    TabOnFullLength = False
+    Precision = 3
+    LabelCaption = 'Units Displayced ....'
+    LabelPosition = lpLeftCenter
+    LabelMargin = 4
+    LabelTransparent = False
+    LabelAlwaysEnabled = False
+    LabelFont.Charset = DEFAULT_CHARSET
+    LabelFont.Color = clWindowText
+    LabelFont.Height = -11
+    LabelFont.Name = 'MS Sans Serif'
+    LabelFont.Style = [fsBold]
+    Lookup.CaseSensitive = False
+    Lookup.Color = clWindow
+    Lookup.DisplayCount = 4
+    Lookup.Enabled = False
+    Lookup.History = False
+    Lookup.NumChars = 2
+    Lookup.Multi = False
+    Lookup.Separator = ';'
+    Persistence.Enable = False
+    Persistence.Location = plInifile
+    Color = clWindow
+    Enabled = True
+    HintShowLargeText = False
+    OleDropTarget = False
+    OleDropSource = False
+    Signed = False
+    TabOrder = 0
+    Text = '0.000'
+    Transparent = False
+    Visible = True
+    Version = '2.6.2.1'
+  end
+  object OKGain: TButton
+    Left = 38
+    Top = 102
+    Width = 97
+    Height = 20
+    Caption = 'OK'
+    TabOrder = 1
+    OnClick = OKGainClick
+  end
+  object CancelGain: TButton
+    Left = 205
+    Top = 102
+    Width = 97
+    Height = 20
+    Caption = 'Cancel'
+    TabOrder = 2
+    OnClick = CancelGainClick
+  end
+end
