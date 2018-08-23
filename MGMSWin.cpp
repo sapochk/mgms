@@ -1,6 +1,7 @@
 const char *programName="Mechanical Gage Measurement System";
 //static char programVersion[]="$Revision$";
-static char programVersion[]="1.0.2";
+//static char programVersion[]="1.0.2";
+static char programVersion[]="1.0.3";	// 8/23/18 Using LastCalTime for adjustment
 static char *id="$Id$";
 
 #define DEBUG_APPLANIX 		0
@@ -38,12 +39,12 @@ static char *id="$Id$";
 #pragma link "AdvEdit"
 #pragma link "AdvSpin"
 #pragma link "LED"
+#pragma link "AppEvent"
 #pragma link "AdvGrid"
 #pragma link "BaseGrid"
 #pragma link "AsgLinks"
 #pragma link "ALed"
 #pragma link "TransBtn"
-#pragma link "AppEvent"
 #pragma resource "*.dfm"
 
 #include "MgmsMessages.cpp"
@@ -187,6 +188,7 @@ void ReadCalibrationData()
 	con_read (buffer);
 	ReadCodes(buffer);
 	g_pConfigs = configs[0];
+
 }
 
 #define _NEGATIVE_   ((unsigned short)(0))
@@ -215,7 +217,8 @@ void AdjustInputs()
 
 			// Technically this is Gage
 			g_Gages[ nChannel ] =  (g_dCVolts[ nChannel ] / g_Input[ nChannel ].UnitsPerVolt);
-			g_Gages[ nChannel ] += g_Input[ nChannel ].LastCalTime; // Zero Adjustment Gages
+//			g_Gages[ nChannel ] += g_Input[ nChannel ].LastCalTime; 				// Zero Adjustment Gages 8/23/18
+			g_Gages[ nChannel ] += ((double)g_Input[ nChannel ].LastCalTime)/100.0; // Zero Adjustment Gages 8/23/18
 		}
 	}
 }
@@ -515,6 +518,7 @@ TMainForm::readConfigs()
 	char buffer[256];
 	char msgBuffer[256];
 	int nChannel;
+    double std_gage;
 
 	ReadCalibrationData();
 	CopyCalibratedData(); // Make local copy into g_Input
@@ -531,7 +535,6 @@ TMainForm::readConfigs()
 			g_Input[ nChannel ].gain = 1;
 			g_Input[ nChannel ].UnitsPerVolt = 1;
 			g_Input[ nChannel ].polarity = _POSITIVE_;
-
 			g_Input[ nChannel ].LastCalTime=0;
 
 			MakeNewCalibration=true;
@@ -543,6 +546,15 @@ TMainForm::readConfigs()
 		// New format,
 		if(g_Input[ 2 ].LastCalTime == 0 || g_Input[ 4 ].LastCalTime == 0)
 			MakeNewCalibration=true;
+		else // 8/23/18
+        {
+        	if(g_Input[2 ].LastCalTime < 10000 && g_Input[ 4 ].LastCalTime < 10000)
+			{
+				g_Input[ 2 ].LastCalTime = g_Input[ 2 ].LastCalTime * 100;
+				g_Input[ 4 ].LastCalTime = g_Input[ 4 ].LastCalTime * 100;
+                SaveCalibrationData();
+			}
+        }
 	}
 }
 //---------------------------------------------------------------------------
@@ -1542,7 +1554,6 @@ void TMainForm::ReCalculateGain()
 
     	g_Input[ CalChannel ].gain = dDesiredGain;
     	g_Input[ CalChannel ].LastCalDate = sys_date( );
-//    	g_Input[ CalChannel ].LastCalTime = sys_time( );
 	}
 
 	AdjustInputs(); // see what is the result
@@ -1560,8 +1571,6 @@ void TMainForm::ReCalculateZero()
 
 
 	g_Input[ CalChannel ].LastCalDate = sys_date( );
-//	g_Input[ CalChannel ].LastCalTime = sys_time( );
-
 	g_Input[ CalChannel ].zero = dVoltageMean;
 
 	AdjustInputs(); // see what is the result
@@ -1669,7 +1678,8 @@ void TMainForm::DisplayChannels(int section)
 
 			if(g_Input[ nChannel ].UnitsPerVolt)
 			{
-				sprintf(b,"%d",g_Input[ nChannel ].LastCalTime); // Zero Gage
+//				sprintf(b,"%d",g_Input[ nChannel ].LastCalTime); // Zero Gage
+				sprintf(b,"%.3f",((double)g_Input[ nChannel ].LastCalTime)/100.0); // Zero Gage
 				Grid->Cells[9][nChannel] = b;
 			}
 			else
@@ -1688,36 +1698,43 @@ void TMainForm::DisplayChannels(int section)
 void __fastcall
 TMainForm::GridCellValidate(TObject *Sender, int ACol, int ARow, AnsiString &Value, bool &Valid)
 {
+	double offset;
 	switch(ACol)
     {
     	case 1:
         	if(Value == "+")
-            	g_Input[ ARow/*-1*/ ].polarity = _POSITIVE_;
+            	g_Input[ARow].polarity = _POSITIVE_;
             else if(Value == "-")
-				g_Input[ ARow/*-1*/ ].polarity = _NEGATIVE_;
+				g_Input[ARow].polarity = _NEGATIVE_;
             else
             	Valid=false;
 			break;
 
 		case 2:
-			strncpy(g_Input[ ARow/*-1*/ ].name,Value.c_str(),sizeof(g_Input[ ARow/*-1*/ ].name)-1);
+			strncpy(g_Input[ARow].name,Value.c_str(),sizeof(g_Input[ ARow].name)-1);
 			break;
 
 		case 4:
-			g_Input[ ARow/*-1*/ ].zero = Value.ToDouble();
+			g_Input[ARow].zero = Value.ToDouble();
             // Adjust zero by hand
-			g_Input[ ARow/*-1*/ ].LastCalDate = sys_date( );
+			g_Input[ARow].LastCalDate = sys_date( );
 			break;
 
 		case 5:
 			// Adjust gain by hand
-			g_Input[ ARow/*-1*/ ].gain = Value.ToDouble();
-			g_Input[ ARow/*-1*/ ].LastCalDate = sys_date( );
+			g_Input[ARow].gain = Value.ToDouble();
+			g_Input[ARow].LastCalDate = sys_date( );
 			break;
 
 		case 6:
-			g_Input[ ARow/*-1*/ ].UnitsPerVolt = Value.ToDouble();
+			g_Input[ARow].UnitsPerVolt = Value.ToDouble();
 			break;
+
+		case 9: // 8/23/18
+        	offset = Value.ToDouble()*100;
+			g_Input[ARow].LastCalTime = offset;
+			break;
+
 	}
 
 
@@ -1753,8 +1770,13 @@ TMainForm::GridGetEditorProp(TObject *Sender, int ACol, int ARow, TEditLink *AEd
 			edit->Signed = true;
 			break;
 		case 7:	// Cannot edit
-		case 8: // Cannot edit
-		case 9: // Date
+		case 8: // Total Gage
+        	break;
+		case 9:  // Gage offset 8/23/18
+			edit->EditType = Advedit::etFloat;
+			edit->Precision = 3;
+			edit->Signed = true;
+			break;
 		case 10: // Time
         	break;
 	}
@@ -1794,12 +1816,21 @@ TMainForm::GridSelectCell(TObject *Sender, int ACol,   int ARow, bool &CanSelect
             CanSelect = false;
         XCol = 2;
     }
-    if(ACol >= 7)
+    // 8/23/18
+    if(ACol == 7)
     {
         if(EditLed->Value)
             CanSelect = false;
         XCol = 6;
     }
+
+    if(ACol == 10)
+    {
+        if(EditLed->Value)
+            CanSelect = false;
+        XCol = 8;
+    }
+    // 8/23/18
 }
 //---------------------------------------------------------------------------
 
@@ -2008,7 +2039,6 @@ TMainForm::GageOnAxleBtnClick(TObject *Sender)
 		gageInMM = GageOnTrackMMEd->Text.ToInt();
 		if(gageInMM<900)
 			GageInMM->Caption = "Value Too Low";
-
 	}
 	catch(...)
 	{
@@ -2023,8 +2053,9 @@ TMainForm::GageOnAxleBtnClick(TObject *Sender)
 		g_Input[ 1 ].UnitsPerVolt = 0;//voltsPerMM;
 		g_Input[ 2 ].UnitsPerVolt = voltsPerMM;
 
-		g_Input[ 1 ].LastCalTime=0;//gageInMM;	// will use date for
-		g_Input[ 2 ].LastCalTime=gageInMM;	// will use date for
+		g_Input[ 1 ].LastCalTime=0;
+//		g_Input[ 2 ].LastCalTime=gageInMM;		// 8/23/18
+		g_Input[ 2 ].LastCalTime=gageInMM*100;	// 8/23/18
 
 		g_Input[ 1 ].zero = minVolts;
 		g_Input[ 2 ].zero = minVolts;
@@ -2034,8 +2065,9 @@ TMainForm::GageOnAxleBtnClick(TObject *Sender)
 		g_Input[ 3 ].UnitsPerVolt = 0;//voltsPerMM;
 		g_Input[ 4 ].UnitsPerVolt = voltsPerMM;
 
-		g_Input[ 3 ].LastCalTime=0;//gageInMM;	// will use date for
-		g_Input[ 4 ].LastCalTime=gageInMM;	// will use date for
+		g_Input[ 3 ].LastCalTime=0;
+//		g_Input[ 4 ].LastCalTime=gageInMM;		// 8/23/18
+		g_Input[ 4 ].LastCalTime=gageInMM*100;  // 8/23/18
 
 		g_Input[ 3 ].zero = minVolts;
 		g_Input[ 4 ].zero = minVolts;

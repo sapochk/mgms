@@ -14,10 +14,10 @@
       U:\usr\lib\cb60\VMELib.lib U:\usr\lib\cb60\HWLib.lib 
       u:\usr\lib\cb60\BConfigs.lib u:\usr\lib\cb60\bntglib.lib 
       u:\usr\lib\cb60\bntrlib.lib U:\usr\lib\cb60\bw37wstd.lib"/>
-    <LIBRARIES value="rxctl6.lib nmfast.lib Tee7C6.lib bdertl.lib bcbsmp.lib VclSmp.lib 
-      vcldb.lib dbrtl.lib vclx.lib TMSC6.lib PascalPack6.lib rtl.lib vcl.lib"/>
-    <SPARELIBS value="vcl.lib rtl.lib PascalPack6.lib TMSC6.lib vclx.lib dbrtl.lib vcldb.lib 
-      VclSmp.lib bcbsmp.lib bdertl.lib Tee7C6.lib nmfast.lib rxctl6.lib"/>
+    <LIBRARIES value="rxctl6.lib PascalPack6.lib nmfast.lib Tee7C6.lib bdertl.lib bcbsmp.lib 
+      VclSmp.lib vcldb.lib dbrtl.lib vclx.lib TMSC6.lib rtl.lib vcl.lib"/>
+    <SPARELIBS value="vcl.lib rtl.lib TMSC6.lib vclx.lib dbrtl.lib vcldb.lib VclSmp.lib 
+      bcbsmp.lib bdertl.lib Tee7C6.lib nmfast.lib PascalPack6.lib rxctl6.lib"/>
     <PACKAGES value="vcl.bpi rtl.bpi vclx.bpi bcbsmp.bpi dbrtl.bpi adortl.bpi vcldb.bpi 
       qrpt.bpi bdertl.bpi vcldbx.bpi dsnap.bpi cds.bpi bdecds.bpi ibxpress.bpi 
       visualclx.bpi visualdbclx.bpi vclie.bpi xmlrtl.bpi inet.bpi inetdbbde.bpi 
@@ -34,7 +34,7 @@
     <SYSDEFINES value="NO_STRICT;_RTLDLL"/>
     <MAINSOURCE value="MGMS.cpp"/>
     <INCLUDEPATH value="U:\src\lib\vmeiolib;..\..;$(BCB)\include;$(BCB)\include\vcl;$(TEEINCPATH);u:\include;u:\usr\include;u:\usr\em\include;u:\WINRT\Include;u:\USR\WIN\INCLUDE;u:\Comp6\PascalPack;u:\Comp6\rx;u:\Comp6\Tms;u:\include\hardware;u:\include\vme"/>
-    <LIBPATH value="U:\src\lib\vmeiolib;$(BCB)\lib;$(BCB)\lib\obj;$(TEELIBPATH);u:\Comp6\Tms;u:\Comp6\PascalPack;u:\Comp6\rx;u:\usr\lib\cb60"/>
+    <LIBPATH value="U:\src\lib\vmeiolib;$(BCB)\lib;$(BCB)\lib\obj;$(BCB)\lib\Release;$(TEELIBPATH);u:\Comp6\Tms;u:\Comp6\PascalPack;u:\Comp6\rx;u:\usr\lib\cb60"/>
     <WARNINGS value="-w-par"/>
     <OTHERFILES value=""/>
   </MACROS>
@@ -80,7 +80,7 @@ IncludeVerInfo=1
 AutoIncBuild=0
 MajorVer=1
 MinorVer=0
-Release=2
+Release=3
 Build=0
 Debug=0
 PreRelease=0
@@ -93,7 +93,7 @@ CodePage=1252
 [Version Info Keys]
 CompanyName=Plasser American Corp.
 FileDescription=Optical Gage Measurement Program
-FileVersion=1.0.2.0
+FileVersion=1.0.3.0
 InternalName=OGMSW
 LegalCopyright=Plasser American Corp. 2014
 LegalTrademarks=Plasser American Corp. 2014
@@ -104,78 +104,25 @@ Comments=2014
 Author=Igor Kononov
 
 [HistoryLists\hlIncludePath]
-Count=26
+Count=1
 Item0=U:\src\lib\vmeiolib;..\..;$(BCB)\include;$(BCB)\include\vcl;$(TEEINCPATH);u:\include;u:\usr\include;u:\usr\em\include;u:\WINRT\Include;u:\USR\WIN\INCLUDE;u:\Comp6\PascalPack;u:\Comp6\rx;u:\Comp6\Tms;u:\include\hardware;u:\include\vme
-Item1=..\..;$(BCB)\include;$(BCB)\include\vcl;$(TEEINCPATH);u:\include;u:\usr\include;u:\usr\em\include;u:\WINRT\Include;u:\USR\WIN\INCLUDE;u:\Comp6\PascalPack;u:\Comp6\rx;u:\Comp6\Tms;u:\include\hardware;u:\include\vme
-Item2=..\..;U:\src\lib\vmeiolib;$(BCB)\include;$(BCB)\include\vcl;u:\include;u:\usr\include;u:\usr\em\include;u:\WINRT\Include;u:\USR\WIN\INCLUDE;u:\Comp6\PascalPack;u:\Comp6\rx;$(TEEINCPATH);u:\Comp6\Tms;u:\igor\HARDWARE\OGMS\OGMS Driver\Driver;u:\include\hardware;u:\include\vme
-Item3=U:\src\lib\vmeiolib;$(BCB)\include;$(BCB)\include\vcl;u:\include;u:\usr\include;u:\usr\em\include;u:\WINRT\Include;u:\USR\WIN\INCLUDE;u:\Comp6\PascalPack;u:\Comp6\rx;$(TEEINCPATH);u:\Comp6\Tms;u:\igor\HARDWARE\OGMS\OGMS Driver\Driver;u:\include\hardware;u:\include\vme
-Item4=U:\src\lib\vmeiolib;$(BCB)\include;$(BCB)\include\vcl;u:\include;u:\usr\include;u:\usr\em\include;u:\WINRT\Include;u:\USR\WIN\INCLUDE;u:\Comp6\PascalPack;u:\Comp6\rx;$(TEEINCPATH);u:\Comp6\Tms;u:\igor\HARDWARE\OGMS\OGMS Driver\Driver
-Item5=$(BCB)\include;$(BCB)\include\vcl;u:\include;u:\usr\include;u:\usr\em\include;u:\WINRT\Include;u:\USR\WIN\INCLUDE;u:\Comp6\PascalPack;u:\Comp6\rx;$(TEEINCPATH);u:\Comp6\Tms;u:\igor\HARDWARE\OGMS\OGMS Driver\Driver
-Item6=$(BCB)\include;$(BCB)\include\vcl;u:\include;u:\usr\include;u:\usr\em\include;u:\WINRT\Include;u:\USR\WIN\INCLUDE;u:\Comp6\PascalPack;u:\Comp6\rx;$(TEEINCPATH);u:\Comp6\Tms;u:\igor\HARDWARE\OGMS\OGMS Driver\Driver\
-Item7=$(BCB)\include;$(BCB)\include\vcl;u:\include;u:\usr\include;u:\usr\em\include;u:\WINRT\Include;u:\USR\WIN\INCLUDE;u:\Comp6\PascalPack;u:\Comp6\rx;$(TEEINCPATH);u:\Comp6\Tms;U:\igor\HARDWARE\OGMS\OGMS Driver
-Item8=$(BCB)\include;$(BCB)\include\vcl;u:\include;u:\usr\include;u:\usr\em\include;u:\WINRT\Include;u:\USR\WIN\INCLUDE;u:\Comp6\PascalPack;u:\Comp6\rx;$(TEEINCPATH);u:\Comp6\Tms
-Item9=$(BCB)\include;$(BCB)\include\vcl;u:\include;u:\usr\include;u:\usr\em\include;u:\WINRT\Include;u:\USR\WIN\INCLUDE;u:\Comp6\PascalPack;u:\Comp6\rx;C:\TeeChart707\Builder6\Include;u:\Comp6\Tms
-Item10=x:\Comp6\Tms;$(BCB)\include;$(BCB)\include\vcl;x:\include;x:\usr\include;x:\usr\em\include;x:\WINRT\Include;x:\USR\WIN\INCLUDE;x:\Comp6\PascalPack;x:\Comp6\rx;C:\TeeChart707\Builder6\Include
-Item11=x:\Comp6\Tms;$(BCB)\include;$(BCB)\include\vcl;x:\include;x:\usr\include;x:\usr\em\include;x:\WINRT\Include;x:\USR\WIN\INCLUDE;x:\Comp6\PascalPack;x:\Comp6\rx;C:\TeeChart707\Builder6\Include;include
-Item12=x:\Comp6\Tms;$(BCB)\include;$(BCB)\include\vcl;x:\include;x:\usr\include;x:\usr\em\include;x:\WINRT\Include;x:\USR\WIN\INCLUDE;x:\Comp6\PascalPack;x:\Comp6\rx;C:\TeeChart7\Builder6\Include
-Item13=x:\Comp6\Tms;$(BCB)\include;$(BCB)\include\vcl;x:\include;x:\usr\include;x:\usr\em\include;x:\WINRT\Include;x:\USR\WIN\INCLUDE;x:\Comp6\PascalPack;x:\Comp6\rx;C:\TeeChart\Builder6\Include
-Item14=x:\Comp6\Tms;$(BCB)\include;$(BCB)\include\vcl;x:\include;x:\usr\include;x:\usr\em\include;x:\WINRT\Include;x:\USR\WIN\INCLUDE;x:\Comp6\PascalPack;x:\Comp6\rx
-Item15=P:\Comp6\Tms;$(BCB)\include;$(BCB)\include\vcl;x:\include;x:\usr\include;x:\usr\em\include;x:\WINRT\Include;x:\USR\WIN\INCLUDE;P:\Comp6\PascalPack;P:\Comp6\rx;C:\TeeChart\Builder6\Include
-Item16=$(BCB)\Projects;P:\Comp6\Tms;$(BCB)\include;$(BCB)\include\vcl;x:\include;x:\usr\include;x:\usr\em\include;x:\WINRT\Include;x:\USR\WIN\INCLUDE;P:\Comp6\PascalPack;P:\Comp6\rx
-Item17=$(BCB)\Projects;P:\Comp6\Tms;$(BCB)\include;$(BCB)\include\vcl;u:\include;u:\usr\include;u:\usr\em\include;u:\WINRT\Include;u:\USR\WIN\INCLUDE;P:\Comp6\PascalPack;P:\Comp6\rx;MGMS
-Item18=P:\Comp6\Tms;$(BCB)\include;$(BCB)\include\vcl;u:\include;u:\usr\include;u:\usr\em\include;u:\WINRT\Include;u:\USR\WIN\INCLUDE;P:\Comp6\PascalPack;P:\Comp6\rx;MGMS
-Item19=P:\Comp6\Tms;$(BCB)\include;$(BCB)\include\vcl;X:\include;x:\usr\include;x:\usr\em\include;X:\WINRT\Include;X:\USR\WIN\INCLUDE;P:\Comp6\PascalPack;P:\Comp6\rx;MGMS
-Item20=..;$(BCB)\include;$(BCB)\include\vcl;X:\include;x:\usr\include;x:\usr\em\include;X:\WINRT\Include;X:\USR\WIN\INCLUDE;P:\Comp6\Tms;P:\Comp6\PascalPack;P:\Comp6\rx;MGMS
-Item21=..;MGMS;$(BCB)\include;$(BCB)\include\vcl;X:\include;x:\usr\include;x:\usr\em\include;X:\WINRT\Include;X:\USR\WIN\INCLUDE;P:\Comp6\Tms;P:\Comp6\PascalPack;P:\Comp6\rx
-Item22=..\;MGMS;$(BCB)\include;$(BCB)\include\vcl;X:\include;x:\usr\include;x:\usr\em\include;X:\WINRT\Include;X:\USR\WIN\INCLUDE;P:\Comp6\Tms;P:\Comp6\PascalPack;P:\Comp6\rx
-Item23=$(BCB)\include;$(BCB)\include\vcl;X:\include;x:\usr\include;x:\usr\em\include;X:\WINRT\Include;X:\USR\WIN\INCLUDE;P:\Comp6\Tms;P:\Comp6\PascalPack;P:\Comp6\rx
-Item24=$(BCB)\include;$(BCB)\include\vcl;P:\Comp6\Tms;P:\Comp6\PascalPack;P:\Comp6\rx
-Item25=..\;Generic Graphic Application;$(BCB)\include;$(BCB)\include\vcl
 
 [HistoryLists\hlLibraryPath]
-Count=23
-Item0=U:\src\lib\vmeiolib;$(BCB)\lib;$(BCB)\lib\obj;$(TEELIBPATH);u:\Comp6\Tms;u:\Comp6\PascalPack;u:\Comp6\rx;u:\usr\lib\cb60
-Item1=$(BCB)\lib;$(BCB)\lib\obj;$(TEELIBPATH);u:\Comp6\Tms;u:\Comp6\PascalPack;u:\Comp6\rx;u:\usr\lib\cb60
-Item2=..\..;U:\src\lib\vmeiolib;$(BCB)\lib;$(BCB)\lib\obj;u:\Comp6\Tms;u:\Comp6\PascalPack;u:\Comp6\rx;u:\usr\lib\cb60;$(TEELIBPATH)
-Item3=U:\src\lib\vmeiolib;$(BCB)\lib;$(BCB)\lib\obj;u:\Comp6\Tms;u:\Comp6\PascalPack;u:\Comp6\rx;u:\usr\lib\cb60;$(TEELIBPATH)
-Item4=$(BCB)\lib;$(BCB)\lib\obj;u:\Comp6\Tms;u:\Comp6\PascalPack;u:\Comp6\rx;u:\usr\lib\cb60;$(TEELIBPATH)
-Item5=$(BCB)\lib;$(BCB)\lib\obj;u:\Comp6\Tms;u:\Comp6\PascalPack;u:\Comp6\rx;u:\usr\lib\cb60;C:\TeeChart707\Builder6\Lib
-Item6=$(BCB)\lib;$(BCB)\lib\obj;u:\Comp6\Tms;u:\Comp6\PascalPack;u:\Comp6\rx;u:\usr\lib\cb60
-Item7=C:\TeeChart707\Builder6\Lib;x:\include;$(BCB)\Projects;x:\Comp6\Tms;$(BCB)\lib\obj;$(BCB)\lib;x:\Comp6\PascalPack;x:\Comp6\rx;x:\usr\lib\cb60
-Item8=C:\TeeChart7\Builder6\Lib;x:\include;$(BCB)\Projects;x:\Comp6\Tms;$(BCB)\lib\obj;$(BCB)\lib;x:\Comp6\PascalPack;x:\Comp6\rx;x:\usr\lib\cb60
-Item9=C:\TeeChart7\Builder6\Lib;x:\include;$(BCB)\Projects;x:\Comp6\Tms;$(BCB)\lib\obj;$(BCB)\lib;x:\Comp6\PascalPack;x:\Comp6\rx;x:\usr\lib\cb60;C:\TeeChart\Builder6\Lib
-Item10=C:\TeeChart\Builder6\Lib;C:\TeeChart7\Builder6\Lib;U:\include;$(BCB)\Projects;P:\Comp6\Tms;$(BCB)\lib\obj;$(BCB)\lib;P:\Comp6\PascalPack;P:\Comp6\rx;x:\usr\lib\cb60
-Item11=C:\TeeChart7\Builder6\Lib;U:\include;$(BCB)\Projects;P:\Comp6\Tms;$(BCB)\lib\obj;$(BCB)\lib;P:\Comp6\PascalPack;P:\Comp6\rx;x:\usr\lib\cb60
-Item12=U:\include;$(BCB)\Projects;P:\Comp6\Tms;$(BCB)\lib\obj;$(BCB)\lib;P:\Comp6\PascalPack;P:\Comp6\rx;x:\usr\lib\cb60
-Item13=U:\include;$(BCB)\Projects;P:\Comp6\Tms;$(BCB)\lib\obj;$(BCB)\lib;P:\Comp6\PascalPack;P:\Comp6\rx;u:\usr\lib\cb60
-Item14=$(BCB)\Projects;P:\Comp6\Tms;$(BCB)\lib\obj;$(BCB)\lib;P:\Comp6\PascalPack;P:\Comp6\rx;u:\usr\lib\cb60
-Item15=P:\Comp6\Tms;$(BCB)\lib\obj;$(BCB)\lib;P:\Comp6\PascalPack;P:\Comp6\rx;u:\usr\lib\cb60
-Item16=P:\Comp6\Tms;$(BCB)\lib\obj;$(BCB)\lib;P:\Comp6\PascalPack;P:\Comp6\rx;x:\usr\lib\cb60
-Item17=..;$(BCB)\lib\obj;$(BCB)\lib;P:\Comp6\Tms;P:\Comp6\PascalPack;P:\Comp6\rx;x:\usr\lib\cb60
-Item18=..;MGMS;$(BCB)\lib\obj;$(BCB)\lib;P:\Comp6\Tms;P:\Comp6\PascalPack;P:\Comp6\rx;x:\usr\lib\cb60
-Item19=..\;MGMS;$(BCB)\lib\obj;$(BCB)\lib;P:\Comp6\Tms;P:\Comp6\PascalPack;P:\Comp6\rx;x:\usr\lib\cb60
-Item20=$(BCB)\lib\obj;$(BCB)\lib;P:\Comp6\Tms;P:\Comp6\PascalPack;P:\Comp6\rx;x:\usr\lib\cb60
-Item21=$(BCB)\lib\obj;$(BCB)\lib;P:\Comp6\Tms;P:\Comp6\PascalPack;P:\Comp6\rx
-Item22=..\;Generic Graphic Application;$(BCB)\lib\obj;$(BCB)\lib
+Count=2
+Item0=U:\src\lib\vmeiolib;$(BCB)\lib;$(BCB)\lib\obj;$(BCB)\lib\Release;$(TEELIBPATH);u:\Comp6\Tms;u:\Comp6\PascalPack;u:\Comp6\rx;u:\usr\lib\cb60
+Item1=U:\src\lib\vmeiolib;$(BCB)\lib;$(BCB)\lib\obj;$(TEELIBPATH);u:\Comp6\Tms;u:\Comp6\PascalPack;u:\Comp6\rx;u:\usr\lib\cb60
 
 [HistoryLists\hlDebugSourcePath]
-Count=4
+Count=1
 Item0=$(BCB)\source\vcl;U:\MkLibs6\source\PlasserPack;u:\src\lib\vmelib\
-Item1=$(BCB)\source\vcl;U:\MkLibs6\source\PlasserPack;P:\Comp6\tms\
-Item2=$(BCB)\source\vcl;U:\MkLibs6\source\PlasserPack
-Item3=$(BCB)\source\vcl
 
 [HistoryLists\hlConditionals]
 Count=1
 Item0=_DEBUG
 
 [HistoryLists\hlFinalOutputDir]
-Count=5
+Count=1
 Item0=c:\Plasser\
-Item1=c:\ogms\
-Item2=t:\ogms\
-Item3=t:\plasser\
-Item4=c:\plasser
 
 [Debugging]
 DebugSourceDirs=$(BCB)\source\vcl;U:\MkLibs6\source\PlasserPack;u:\src\lib\vmelib\

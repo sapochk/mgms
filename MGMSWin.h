@@ -20,6 +20,7 @@
 #include "LED.hpp"
 #include <ScktComp.hpp>
 #include <NMUDP.hpp>
+#include "AppEvent.hpp"
 #include "AdvGrid.hpp"
 #include "BaseGrid.hpp"
 #include <Grids.hpp>
@@ -28,7 +29,6 @@
 #include <ImgList.hpp>
 #include <ToolWin.hpp>
 #include "TransBtn.hpp"
-#include "AppEvent.hpp"
 
 //---------------------------------------------------------------------------
 #include <string>
